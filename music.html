@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NyimboPost</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2d2d2d;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .song-list {
+      margin-top: 2rem;
+    }
+
+    .song-item {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>NyimboPost - Pakia Nyimbo Zako Hapa</h1>
+</header>
+
+<div class="container">
+  <h2>Pakia Wimbo Mpya</h2>
+  <form id="uploadForm">
+    <input type="text" id="artist" placeholder="Jina la Msanii" required />
+    <input type="text" id="title" placeholder="Jina la Wimbo" required />
+    <input type="file" id="file" accept="audio/*" required />
+    <button type="submit">Pakia Wimbo</button>
+  </form>
+
+  <div class="song-list" id="songList">
+    <h3>Nyimbo Zilizopostiwa:</h3>
+    <!-- Nyimbo zitajaa hapa -->
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('uploadForm');
+  const songList = document.getElementById('songList');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const artist = document.getElementById('artist').value;
+    const title = document.getElementById('title').value;
+    const file = document.getElementById('file').files[0];
+
+    if (artist && title && file) {
+      const songItem = document.createElement('div');
+      songItem.className = 'song-item';
+      songItem.innerHTML = `<strong>${artist}</strong> - ${title} <br><audio controls src="${URL.createObjectURL(file)}"></audio>`;
+      songList.appendChild(songItem);
+
+      // Clear form
+      form.reset();
+    }
+  });
+</script>
+
+</body>
+</html>
